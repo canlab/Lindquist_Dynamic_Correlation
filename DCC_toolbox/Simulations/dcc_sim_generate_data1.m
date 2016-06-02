@@ -4,6 +4,12 @@ function [regions, wh] = dcc_sim_generate_data1(data_options)
 %
 % regions = t x 2 matrix of two time series
 % wh = which time points have TRUE inter-region correlations
+%
+% Requires data_options structure with rval and smooth fields
+%
+% Example:
+% regions = dcc_sim_generate_data1(struct('rval', .5, 'smooth', true));
+%
 
 t = 500;
 wh = 151:350; % window
