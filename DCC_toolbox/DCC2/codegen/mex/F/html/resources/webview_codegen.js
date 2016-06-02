@@ -1,0 +1,6 @@
+/*
+ Copyright 2015-2016 The MathWorks, Inc.
+*/
+function webviewToCodeInit(){document.getElementById("rtw_webview").contentWindow.require(["dojo/dom-style","dojo/topic","dojo/window","dijit/registry"],function(k,m,n,p){var c=p.byId("slwebview"),h=!0,g={traceableColor:"#00cfcf",untraceableColor:"#e8d152",getColor:function(d){return d?this.traceableColor:this.untraceableColor},getStyle:function(d,c){var a=this.getColor(c);return"fill:"+a+"; fill-opacity:0.5; stroke:"+a+";"}},f,l=function(d,e,a){c.open(d).then(function(){var b;if(b=c.getElementViewer())if(f&&
+k.set(f,"background",""),b=b.getLineNode(e))k.set(b,"background",a),n.scrollIntoView(b),f=b})};m.subscribe("slwebview/select",function(d,e){var a,b;c.isElement(d)&&h&&(c.unhighlightAll(),a=d.backing.sid,b=e&&e.line?e.line:-1,0<=b&&(a=d.backing.obj_viewer.code_sid+":"+b.toString()),a=top.rtwChangeSysCallback(a),c.highlight(d,g.getStyle(d,a)),0<=b&&l(d,b,g.getColor(a)))});top.codeToWebView=function(d,e){var a=c.getElement(d),b,f;a||(f=d.lastIndexOf(":"),b=d.substring(f+1),a=c.getElement(e));a&&c.open(a.diagram).then(function(){c.unhighlightAll();
+c.moveToView(a);h=!1;c.highlight(a,g.getStyle(a,!0));0<=b?(l(a,b,g.getColor(!0)),c.select(a)):c.select(a.diagram);h=!0})}})};

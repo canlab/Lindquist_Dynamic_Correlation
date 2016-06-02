@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Code Generation Report</title>
+<link rel="stylesheet" type="text/css" href="resources/eml_report.css" />
+<link rel="stylesheet" type="text/css" href="resources/jQuery/ui.resizable.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+
+<script type="text/javascript" src="resources/jQuery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery-ui-1.7.custom.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.tablesorter.mod.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.hotkeys-0.7.8.js"></script>
+<script type="text/javascript" src="resources/eml_report_interactions.js"></script>
+<script type="text/javascript" src="resources/eml_report_layout.js"></script>
+<script type="text/javascript" src="rtwshrink.js"></script>
+<script type="text/javascript">
+var localizedMessages = {
+    callSelectPrompt: "Select a function call:",
+    callSelectSource: "Calls from this function",
+    callSelectTarget: "Calls to this function",
+    infoForExpression: "Information for the selected expression:",
+    infoForVarType: "Information for the selected variable:",
+    infoForVarConst: "Information for the selected compile-time constant:",
+    infoForVarNone: "This variable does not have information associated with it.",
+    infoForFilter: "Matched {0}/{1} functions, {2}/{3} methods",
+    autoExtrinsicCall: "Only supported within the MATLAB environment."
+};
+var keyBindings = {
+        selectMCodeTab: "Ctrl+m",
+    selectCallStackTab: "Ctrl+k",
+        selectCCodeTab: "Ctrl+c",
+       selectReportTab: "Ctrl+r",
+     selectCenterPanel: "Ctrl+w",
+      selectSummaryTab: "Ctrl+s",
+     selectMessagesTab: "Ctrl+a",
+    selectWatchListTab: "Ctrl+v",
+     selectBuildLogTab: "Ctrl+t"
+};
+var functionInfoTable = {
+ MATLABcode1: "F1_mcode.html",
+ fpath1: "/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/F.m",
+ lines1: [1, 1, 104],
+ watch1: "F1_watch.html",
+ title1: "Function: <span class='functionname'><a title='/Users/xuyuting/Dropbox/YutingMartin/20160518&nbsp;toolboxes/DCC2/F.m' class='functionlink' href=\"matlab: open('/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/F.m')\">F</a></span>",
+ tcall1: [  ],
+ scall1: [ [ "From line 29 to epsilonToY", "93#srcline1" ] ],
+ MATLABcode93: "epsilonToY93_mcode.html",
+ fpath93: "/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/epsilonToY.m",
+ lines93: [1, 1, 33],
+ watch93: "epsilonToY93_watch.html",
+ title93: "Function: <span class='functionname'><a title='/Users/xuyuting/Dropbox/YutingMartin/20160518&nbsp;toolboxes/DCC2/epsilonToY.m' class='functionlink' href=\"matlab: open('/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/epsilonToY.m')\">epsilonToY</a></span>",
+ tcall93: [ [ "From F line 29", "1#F93N4:B120" ] ],
+ scall93: [  ],
+ rootFcnID: "1",
+ firstPage: "1",
+ htmlRoot: "/Users/xuyuting/Dropbox/YutingMartin/20160518%20toolboxes/DCC2/codegen/mex/F/html/"
+};
+var scriptInfoTable = {
+ fpath1: "/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/F.m",
+ fpath2: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/length.m",
+ fpath3: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/isDomainError.m",
+ fpath4: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/error.m",
+ fpath5: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+scalar/sqrt.m",
+ fpath6: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/applyScalarFunctionInPlace.m",
+ fpath7: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elfun/sqrt.m",
+ fpath8: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/isBuiltInNumeric.m",
+ fpath9: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+scalar/floor.m",
+ fpath10: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elfun/floor.m",
+ fpath11: "/Applications/MATLAB_R2016a.app/toolbox/shared/coder/coder/+coder/+internal/narginchk.m",
+ fpath12: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/constNonSingletonDim.m",
+ fpath13: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/private/process_sumprod_inputs.m",
+ fpath14: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/scalarEg.m",
+ fpath15: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/fixedpoint/isnumerictype.m",
+ fpath16: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/fixedpoint/isfimath.m",
+ fpath17: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/fixedpoint/isfi.m",
+ fpath18: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/private/eml_isequal_core.m",
+ fpath19: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/isequal.m",
+ fpath20: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/private/combine_vector_elements.m",
+ fpath21: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/private/sumprod.m",
+ fpath22: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/sum.m",
+ fpath23: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/eml_mtimes_helper.m",
+ fpath24: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/useParforConst.m",
+ fpath25: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/intmax.m",
+ fpath26: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/intmin.m",
+ fpath27: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/eml/eml_int_forloop_overflow_check.m",
+ fpath28: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/scalexpCompatible.m",
+ fpath29: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/div.m",
+ fpath30: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/rdivide.m",
+ fpath31: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/mrdivide.p",
+ fpath32: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/scalexpAllocNoCheck.m",
+ fpath33: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/scalexpAlloc.m",
+ fpath34: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/power.m",
+ fpath35: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/applyScalarFunction.m",
+ fpath36: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/isnan.m",
+ fpath37: "/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/epsilonToY.m",
+ fpath38: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/assertValidDim.m",
+ fpath39: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/prodsize.m",
+ fpath40: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/mean.m",
+ fpath41: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/inline.m",
+ fpath42: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/use_refblas.m",
+ fpath43: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/threshold.m",
+ fpath44: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/xgemm.m",
+ fpath45: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/indexMinus.m",
+ fpath46: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/indexTimes.m",
+ fpath47: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/indexPlus.m",
+ fpath48: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+refblas/xgemm.m",
+ fpath49: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/BLASApi.m",
+ fpath50: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/int.m",
+ fpath51: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/size_ptr.m",
+ fpath52: "/Applications/MATLAB_R2016a.app/toolbox/coder/coder/+coder/+internal/c_cast.p",
+ fpath53: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+scalar/abs.m",
+ fpath54: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elfun/abs.m",
+ fpath55: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+refblas/xcabs1.m",
+ fpath56: "/Applications/MATLAB_R2016a.app/toolbox/shared/coder/coder/+coder/+internal/warning.m",
+ fpath57: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/lusolve.m",
+ fpath58: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/mldivide.p",
+ fpath59: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/elmat/ismatrix.m",
+ fpath60: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/ops/mpower.m",
+ fpath61: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/xdot.m",
+ fpath62: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+refblas/xdotx.m",
+ fpath63: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+refblas/xdot.m",
+ fpath64: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/+blas/xdotu.m",
+ fpath65: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/relop.m",
+ fpath66: "/Applications/MATLAB_R2016a.app/toolbox/eml/eml/+coder/+internal/minOrMax.m",
+ fpath67: "/Applications/MATLAB_R2016a.app/toolbox/eml/lib/matlab/datafun/min.m"
+};
+</script>
+</head>
+<body>
+
+<div class="west">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="MATLABcode"><span>MATLAB code</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="callstack"><span>Call stack</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="ccode"><span>C code</span></span></li>
+</ul>
+<div id="MATLABcodebody" class="ui-tabs-panel">
+<!-- Begin Filter -->
+<div class="grayline methodset" onclick="filterClick(event);">
+<a class="collapsed">Filter</a>
+</div>
+<div id="filterbody" class="hidden">
+<table class="myfunc-filter-tbl">
+<tr>
+<td title="Use this filter to display only functions and methods that contain variables or expressions with the specified attributes." colspan="2" class="checkbox">
+<div class="myfunc-filterby-chk"><input type="checkbox" class="filterenable" />
+<div class="filter-enable-lbl">Filter functions and methods</div></div></td></tr><tr>
+<td class="label"><div class="myfunc-filterby-lbl">Filter by:</div></td>
+<td class="select">
+<div class="filters">
+<select class="myfunc-filterby">
+<option id="size">Size</option>
+<option id="complex">Complexity</option>
+<option id="class">Class</option>
+</select>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="label"><div class="myfunc-filterstr-lbl">Filter:</div></td>
+<td class="input"><div>
+
+<div class="size">
+<select class="myfunc-filter size">
+<option value="1 93">1 x 1</option>
+<option value="1">1 x 2</option>
+<option value="1">1 x 3</option>
+<option value="1">2 x 1</option>
+<option value="1">2 x 2</option>
+<option value="1">3 x 2</option>
+<option value="1 93"><b>:</b>2147450880 x <b>:</b>?</option>
+<option value="1"><b>:</b>65535 x 1</option>
+<option value="1"><b>:</b>65535 x <b>:</b>?</option>
+<option value="1"><b>:</b>? x 1</option>
+<option value="1"><b>:</b>? x 2 x <b>:</b>?</option>
+<option value="1"><b>:</b>? x <b>:</b>1</option>
+<option value="93"><b>:</b>? x <b>:</b>65535</option>
+<option value="1"><b>:</b>? x <b>:</b>?</option>
+</select>
+</div>
+
+<div class="complex">
+<select class="myfunc-filter complex">
+<option value="">Complex values</option>
+<option value="1 93">Real values</option>
+</select>
+</div>
+<!-- Begin Class Filter -->
+<div class="class">
+<select class="myfunc-filter class">
+<option value="1 93">double</option>
+</select>
+</div>
+<!-- End Class Filter -->
+</div>
+</td>
+</tr>
+</table>
+<div class="myfunc-count"></div>
+</div>
+<!-- End Filter -->
+<div class="grayline methodset" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionSetClick(event);">
+<a class="expanded">Functions</a>
+</div>
+<!-- Begin Function Tree -->
+<div id="functiontreebody">
+<div class="functionwrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionTreeClick(event);">
+<ol class="tree">
+<!-- Begin Function Tree Roots -->
+<li class="leaf  passed"><a href="#" class="fcn " id="F1N2:F1">F</a></li>
+<li class="leaf  passed"><a href="#" class="fcn " id="F93N4:F2">epsilonToY</a></li>
+<!-- End Function Tree Roots -->
+</ol>
+<!-- Function Tree Nodes -->
+<div class="functiontreenodes hidden">
+</div>
+<!-- End Function Tree Nodes -->
+</div>
+</div>
+<!-- End Function Tree -->
+<!-- Begin Class Tree -->
+<div class="grayline methodset" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="methodSetClick(event);">
+<a class="expanded">Classes</a>
+</div>
+<div id="classlistbody">
+<div class="classwrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="classTreeClick(event);">
+<ol class="tree">
+<!-- Begin Class Tree Roots -->
+<!-- End Class Tree Roots -->
+</ol>
+<!-- Class Tree Nodes -->
+<div class="classlistnodes hidden">
+</div>
+</div>
+</div>
+<!-- End Class Tree -->
+</div>
+<!-- Begin Call Tree -->
+<div id="callstackbody" class="ui-tabs-panel hidden">
+<div class="treewrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="callTreeClick(event);">
+<ol class="tree">
+<!-- Call Tree Root -->
+<li class="node collapsed passed"><a href="#" class="fcn " id="F1N2:L1">F</a>
+<ul>
+<li class="leaf passed"><a href="#" class="fcn " id="F93N4:L2">epsilonToY</a></li>
+</ul>
+</li>
+</ol>
+<!-- Call Tree Nodes -->
+<div class="callstacknodes hidden">
+<ol class="callstacknode" id="callstacknode1">
+
+<li class="node collapsed passed"><a href="#" class="fcn " id="F1N2:l1">F</a>
+<ul>
+<li class="leaf passed"><a href="#" class="fcn " id="F93N4:l2">epsilonToY</a></li>
+</ul>
+</li>
+</ol>
+<ol class="callstacknode" id="callstacknode93">
+
+<li class="leaf passed"><a href="#" class="fcn " id="F93N4:l3">epsilonToY</a>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<!-- End Call Tree -->
+<!-- Begin C Code -->
+<div id="ccodebody" class="ui-tabs-panel hidden">
+<div class="grayline methodset" onclick="ccodeClick(event,1);">
+<a class="expanded">Target Source Files</a>
+</div>
+<!-- Begin C Code List -->
+<div id="ccodelistbody1" class="visible">
+<table class="myfunc-list" cellspacing="0" cellpadding="0" onclick="cFileClickWithMexWarning(event);">
+<tbody>
+<tr class="ccode" id="F_cpp.html"><td class="ccode"><a href="#">F.cpp</a></td></tr>
+<tr class="ccode" id="F_h.html"><td class="ccode"><a href="#">F.h</a></td></tr>
+<tr class="ccode" id="F_data_cpp.html"><td class="ccode"><a href="#">F_data.cpp</a></td></tr>
+<tr class="ccode" id="F_data_h.html"><td class="ccode"><a href="#">F_data.h</a></td></tr>
+<tr class="ccode" id="F_emxutil_cpp.html"><td class="ccode"><a href="#">F_emxutil.cpp</a></td></tr>
+<tr class="ccode" id="F_emxutil_h.html"><td class="ccode"><a href="#">F_emxutil.h</a></td></tr>
+<tr class="ccode" id="F_initialize_cpp.html"><td class="ccode"><a href="#">F_initialize.cpp</a></td></tr>
+<tr class="ccode" id="F_initialize_h.html"><td class="ccode"><a href="#">F_initialize.h</a></td></tr>
+<tr class="ccode" id="F_terminate_cpp.html"><td class="ccode"><a href="#">F_terminate.cpp</a></td></tr>
+<tr class="ccode" id="F_terminate_h.html"><td class="ccode"><a href="#">F_terminate.h</a></td></tr>
+<tr class="ccode" id="F_types_h.html"><td class="ccode"><a href="#">F_types.h</a></td></tr>
+<tr class="ccode" id="eml_int_forloop_overflow_check_cpp.html"><td class="ccode"><a href="#">eml_int_forloop_overflow_check.cpp</a></td></tr>
+<tr class="ccode" id="eml_int_forloop_overflow_check_h.html"><td class="ccode"><a href="#">eml_int_forloop_overflow_check.h</a></td></tr>
+<tr class="ccode" id="epsilonToY_cpp.html"><td class="ccode"><a href="#">epsilonToY.cpp</a></td></tr>
+<tr class="ccode" id="epsilonToY_h.html"><td class="ccode"><a href="#">epsilonToY.h</a></td></tr>
+<tr class="ccode" id="error_cpp.html"><td class="ccode"><a href="#">error.cpp</a></td></tr>
+<tr class="ccode" id="error_h.html"><td class="ccode"><a href="#">error.h</a></td></tr>
+<tr class="ccode" id="mean_cpp.html"><td class="ccode"><a href="#">mean.cpp</a></td></tr>
+<tr class="ccode" id="mean_h.html"><td class="ccode"><a href="#">mean.h</a></td></tr>
+<tr class="ccode" id="power_cpp.html"><td class="ccode"><a href="#">power.cpp</a></td></tr>
+<tr class="ccode" id="power_h.html"><td class="ccode"><a href="#">power.h</a></td></tr>
+<tr class="ccode" id="rt_nonfinite_h.html"><td class="ccode"><a href="#">rt_nonfinite.h</a></td></tr>
+<tr class="ccode" id="rtwtypes_h.html"><td class="ccode"><a href="#">rtwtypes.h</a></td></tr>
+<tr class="ccode" id="scalexpAlloc_cpp.html"><td class="ccode"><a href="#">scalexpAlloc.cpp</a></td></tr>
+<tr class="ccode" id="scalexpAlloc_h.html"><td class="ccode"><a href="#">scalexpAlloc.h</a></td></tr>
+<tr class="ccode" id="sqrt_cpp.html"><td class="ccode"><a href="#">sqrt.cpp</a></td></tr>
+<tr class="ccode" id="sqrt_h.html"><td class="ccode"><a href="#">sqrt.h</a></td></tr>
+<tr class="ccode" id="warning_cpp.html"><td class="ccode"><a href="#">warning.cpp</a></td></tr>
+<tr class="ccode" id="warning_h.html"><td class="ccode"><a href="#">warning.h</a></td></tr>
+</tbody>
+</table>
+</div>
+<!-- End C Code List -->
+<div class="grayline methodset" onclick="ccodeClick(event,3);">
+<a class="collapsed">Interface Source Files</a>
+</div>
+<!-- Begin C Code List -->
+<div id="ccodelistbody3" class="hidden">
+<table class="myfunc-list" cellspacing="0" cellpadding="0" onclick="cFileClickWithMexWarning(event);">
+<tbody>
+<tr class="ccode" id="_coder_F_api_cpp.html"><td class="ccode"><a href="#">_coder_F_api.cpp</a></td></tr>
+<tr class="ccode" id="_coder_F_api_h.html"><td class="ccode"><a href="#">_coder_F_api.h</a></td></tr>
+<tr class="ccode" id="_coder_F_info_cpp.html"><td class="ccode"><a href="#">_coder_F_info.cpp</a></td></tr>
+<tr class="ccode" id="_coder_F_info_h.html"><td class="ccode"><a href="#">_coder_F_info.h</a></td></tr>
+<tr class="ccode" id="_coder_F_mex_cpp.html"><td class="ccode"><a href="#">_coder_F_mex.cpp</a></td></tr>
+<tr class="ccode" id="_coder_F_mex_h.html"><td class="ccode"><a href="#">_coder_F_mex.h</a></td></tr>
+</tbody>
+</table>
+</div>
+<!-- End C Code List -->
+</div>
+<!-- End C Code -->
+</div>
+<!-- Tooltips -->
+<div class="aux hidden">
+<div class="tooltips">
+<div class="tooltip" id="TT1"><table class="tooltip"><tr><th>Size</th><td>1 x 2</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT2"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT3"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x <b>:</b>1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT4"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT5"><table class="tooltip"><tr><th>Size</th><td><b>:</b>65535 x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT6"><table class="tooltip"><tr><th>Size</th><td><b>:</b>65535 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT7"><table class="tooltip"><tr><th>Size</th><td><b>:</b>65535 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT8"><table class="tooltip"><tr><th>Size</th><td>1 x <b>:</b>65535</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT9"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT10"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT11"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT12"><table class="tooltip"><tr><th>Size</th><td><b>:</b>2147450880 x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT13"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x <b>:</b>65535</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT14"><table class="tooltip"><tr><th>Size</th><td>1 x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT15"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x 2 x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT16"><table class="tooltip"><tr><th>Size</th><td>2 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT17"><table class="tooltip"><tr><th>Size</th><td>2 x 2</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT18"><table class="tooltip"><tr><th>Size</th><td>2 x <b>:</b>?</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT19"><table class="tooltip"><tr><th>Size</th><td><b>:</b>? x 2</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT20"><table class="tooltip"><tr><th>Size</th><td>2 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT21"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>logical</td></tr></table></div>
+<div class="tooltip" id="TT22"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT23"><table class="tooltip"><tr><th>Size</th><td>3 x 2</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT24"><table class="tooltip"><tr><th>Size</th><td>1 x 2</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT25"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT26"><table class="tooltip"><tr><th>Size</th><td>1 x 30</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT27"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT28"><table class="tooltip"><tr><th>Size</th><td>1 x 4</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT29"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT30"><table class="tooltip"><tr><th>Size</th><td>1 x 0</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT31"><table class="tooltip"><tr><th>Size</th><td>1 x 5</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT32"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT33"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>int8</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT34"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT35"><table class="tooltip"><tr><th>Size</th><td>1 x 6</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT36"><table class="tooltip"><tr><th>Size</th><td>0 x 0</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT37"><table class="tooltip"><tr><th>Size</th><td>1 x 7</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT38"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT39"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>mxArray</td></tr></table></div>
+<div class="tooltip" id="TT40"><table class="tooltip"><tr><th>Size</th><td>1 x 23</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT41"><table class="tooltip"><tr><th>Size</th><td>1 x 14</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT42"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT43"><table class="tooltip"><tr><th>Size</th><td>1 x 31</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT44"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT45"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT46"><table class="tooltip"><tr><th>Size</th><td>1 x 12</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT47"><table class="tooltip"><tr><th>Size</th><td>1 x 9</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT48"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>int32</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT49"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>coder.opaque</td></tr></table></div>
+<div class="tooltip" id="TT50"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT51"><table class="tooltip"><tr><th>Size</th><td>1 x 27</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+</div>
+</div>
+<!-- End Tooltips -->
+
+<div class="south">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="summary"><span>Summary</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="messages"><span>All Messages (0)</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="watchlist"><span>Variables</span></span></li>
+<li class="ui-tabs-nav-item hidden"><span class="tab-link" id="watchload"><span>Variables</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="buildlog1"><span>Target Build Log</span></span></li>
+</ul>
+
+<!-- Compilation Summary -->
+<div id="summarybody" class="ui-tabs-panel">
+<table cellpadding="1" cellspacing="4">
+<tr><td>C source code generated on:</td><td>18-May-2016 23:39:59</td></tr>
+<tr><td>Coding target:</td><td>C MEX Function</td></tr>
+<tr><td>Number of errors:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of warnings:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of notices:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+</table>
+<p/><p/><table>
+<tr><td><b>Tell Us What You Think</b></td></tr>
+<tr><td>We value your feedback. Please take a few minutes to answer this short questionnaire regarding the Code Generation Report.</td></tr>
+<tr><td><a href="matlab: web('http://www.customersat3.com/TakeSurvey.asp?si=ELu7GTnTYtk%3D','-browser');">&gt;&gt;Provide Feedback</a></td></tr>
+</table>
+</div>
+
+<!-- Message Table -->
+<div id="messagesbody" class="ui-tabs-panel hidden">
+<div>
+<div class="msgsuccess">Code generation successful. Click here to <a href="javaScript:selectSummaryTab();">view summary</a>.</div>
+</div>
+</div>
+<!-- Watchlist Table -->
+<div id="watchlistbody" class="ui-tabs-panel hidden">
+</div>
+<div id="watchloadbody" class="ui-tabs-panel hidden">
+Loading Variables table ...
+</div>
+
+<!-- Target Build Log -->
+<div id="buildlog1body" class="ui-tabs-panel hidden">
+<div class="grayline"></div>
+<table cellpadding="4" cellspacing="1"><tr>
+<td align="left" class="td-linebottomrt-gray" colspan="2">Build Parameters</td>
+</tr>
+<tr><td align="left" valign="top" class="td-linebottomrt">Build directory</td>
+<td align="left" valign="top" class="td-linebottomrt-link"><a href="matlab: cd('/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/codegen/mex/F')">/Users/xuyuting/Dropbox/YutingMartin/20160518 toolboxes/DCC2/codegen/mex/F</a></td></tr>
+<tr><td align="left" valign="top" class="td-linebottomrt">Make wrapper</td>
+<td align="left" valign="top" class="td-linebottomrt-link">sh F_mex.sh</td></tr>
+</table>
+<br/>
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td align="left" class="td-linebottomrt-gray">Build Log</td></tr>
+<tr><td valign="top" class="td-script">
+<pre>
+<span class="td-line-number">    1   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "F_data.cpp"</span>
+<span class="td-line-number">    2   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "F_initialize.cpp"</span>
+<span class="td-line-number">    3   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "F_terminate.cpp"</span>
+<span class="td-line-number">    4   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "F.cpp"</span>
+<span class="td-line-number">    5   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "sqrt.cpp"</span>
+<span class="td-line-number">    6   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "error.cpp"</span>
+<span class="td-line-number">    7   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "eml_int_forloop_overflow_check.cpp"</span>
+<span class="td-line-number">    8   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "epsilonToY.cpp"</span>
+<span class="td-line-number">    9   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "power.cpp"</span>
+<span class="td-line-number">   10   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "scalexpAlloc.cpp"</span>
+<span class="td-line-number">   11   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "mean.cpp"</span>
+<span class="td-line-number">   12   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "warning.cpp"</span>
+<span class="td-line-number">   13   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "interface/_coder_F_info.cpp"</span>
+<span class="td-line-number">   14   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "interface/_coder_F_api.cpp"</span>
+<span class="td-line-number">   15   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "interface/_coder_F_mex.cpp"</span>
+<span class="td-line-number">   16   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -c -fno-common -arch x86_64 -mmacosx-version-min=10.11 -fexceptions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -DMATLAB_MEX_FILE -O2 -DNDEBUG  -I "/Applications/MATLAB_R2016a.app/simulink/include" -I "/Applications/MATLAB_R2016a.app/toolbox/shared/simtargets" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2" -I "/Users/xuyuting/Dropbox/YutingMartin/20160518\ toolboxes/DCC2/codegen/mex/F" -I "./interface" -I "/Applications/MATLAB_R2016a.app/extern/include" -I "." "F_emxutil.cpp"</span>
+<span class="td-line-number">   17   </span><span class="td-line-normal">/usr/bin/xcrun -sdk macosx10.11 clang -Wl,-exported_symbols_list,F_mex_mex.map F_data.o F_initialize.o F_terminate.o F.o sqrt.o error.o eml_int_forloop_overflow_check.o epsilonToY.o power.o scalexpAlloc.o mean.o warning.o _coder_F_info.o _coder_F_api.o _coder_F_mex.o F_emxutil.o -Wl,-twolevel_namespace -undefined error -arch x86_64 -mmacosx-version-min=10.11 -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -bundle -L/Applications/MATLAB_R2016a.app/bin/maci64 -lmx -lmex -lmat -lc++ -Wl,-rpath,@loader_path   -o F_mex.mexmaci64 -L"/Applications/MATLAB_R2016a.app/bin/maci64" -lmwblas   -lemlrt -lcovrt -lut -lmwmathutil </span>
+</pre>
+</td></tr></table>
+
+</div>
+</div>
+<!-- Begin MATLAB Code Panel -->
+<div class="center">
+<div class="center-title">
+<div class="ui-tabs-nav-item ui-tabs-selected">
+<span class="functiontitle">
+</span>
+<!-- Begin Call Sites -->
+<span id="callsiteselecttable" class="call-sites-tbl">
+<span id="callsiteselectlabel" class="filtered">Calls:</span>
+<select id="callsiteselect" onchange="callSiteChange(event)">
+<option value="callsiteprompt">Select a function call:</option>
+</select>
+</span>
+<!-- End Call Sites -->
+</div>
+</div>
+<div class="ui-tabs-panel">
+<div class="code" onmouseover="mcodeMouseOver(event);" onmouseout="mcodeMouseOut(event);"onclick="mcodeClick(event);">
+</div>
+</div>
+</div>
+<!-- End MATLAB Code Panel -->
+</body>
+</html>
