@@ -1,0 +1,150 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>GarchDCC_X_example</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-07-13"><meta name="DC.source" content="GarchDCC_X_example.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Step (1) Generate Data from Garch-DCC model</a></li><li><a href="#2">Step (2) Parameter Setting</a></li><li><a href="#3">Step (3) Run DCC_X, DCC_X_mex (faster on Windows 64bit/Mac)</a></li><li><a href="#4">Step (4) compare estimate H,R with true value H0,R0</a></li></ul></div><h2>Step (1) Generate Data from Garch-DCC model<a name="1"></a></h2><pre class="codeinput">K = 10; <span class="comment">% dimension of time series</span>
+T = 200; <span class="comment">% time series length</span>
+burnIn = 1000;
+
+<span class="comment">% parameters for modelling the volatility of each dimension as a Garch(1,1) process</span>
+theta = [0.01 0.05 0.9];
+<span class="comment">% parameters for conditional correlations</span>
+para = [0.05 0.93];
+<span class="comment">% generate data with true DCC model</span>
+<span class="comment">%       r = T-by-K data matrix</span>
+<span class="comment">%       H0: K*K*T matrix containing H_1,...,H_T, where H_t is the true conditional covariance matrix at time t.</span>
+<span class="comment">%       R0: K*K*T matrix containing R_1,...,R_T, where R_t is the true conditional correlation matrix at time t.</span>
+[ r, H0, R0 ] =   generateData( K, T, theta, para, burnIn );
+r = r - repmat(mean(r),T,1); <span class="comment">% demean</span>
+</pre><h2>Step (2) Parameter Setting<a name="2"></a></h2><p>(2.1) original dcc</p><pre class="codeinput">    allpair = 0; parallel = 0;
+
+<span class="comment">% (2.2) all bivariate pairs dcc</span>
+<span class="comment">%    allpair = 1; parallel = 0; % No parallel</span>
+    <span class="comment">% OR</span>
+<span class="comment">%    allpair = 1; parallel = 1; parpool; % Parallel mode</span>
+</pre><h2>Step (3) Run DCC_X, DCC_X_mex (faster on Windows 64bit/Mac)<a name="3"></a></h2><pre class="codeinput">tic
+[ H,R,Theta,X ] = DCC_X( r, allpair, parallel );
+toc
+
+tic
+[ H,R,Theta,X ] = DCC_X_mex( r, allpair, parallel );
+toc
+</pre><pre class="codeoutput">Elapsed time is 2.903232 seconds.
+Elapsed time is 1.506071 seconds.
+</pre><h2>Step (4) compare estimate H,R with true value H0,R0<a name="4"></a></h2><pre class="codeinput">i = 1;
+j = 2;
+
+figure
+plot(1:T,squeeze(H0(i,j,:)),<span class="string">'r.-'</span>,1:T,squeeze(H(i,j,:)),<span class="string">'b.-'</span>)
+xlabel(<span class="string">'time'</span>)
+legend(<span class="string">'truth'</span>,<span class="string">'estimated'</span>)
+</pre><img vspace="5" hspace="5" src="GarchDCC_X_example_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Step (1) Generate Data from Garch-DCC model
+K = 10; % dimension of time series
+T = 200; % time series length
+burnIn = 1000;
+
+% parameters for modelling the volatility of each dimension as a Garch(1,1) process
+theta = [0.01 0.05 0.9]; 
+% parameters for conditional correlations
+para = [0.05 0.93];
+% generate data with true DCC model
+%       r = T-by-K data matrix
+%       H0: K*K*T matrix containing H_1,...,H_T, where H_t is the true conditional covariance matrix at time t. 
+%       R0: K*K*T matrix containing R_1,...,R_T, where R_t is the true conditional correlation matrix at time t. 
+[ r, H0, R0 ] =   generateData( K, T, theta, para, burnIn );
+r = r - repmat(mean(r),T,1); % demean
+
+%% Step (2) Parameter Setting
+% (2.1) original dcc
+    allpair = 0; parallel = 0;
+
+% (2.2) all bivariate pairs dcc
+%    allpair = 1; parallel = 0; % No parallel
+    % OR
+%    allpair = 1; parallel = 1; parpool; % Parallel mode
+
+%% Step (3) Run DCC_X, DCC_X_mex (faster on Windows 64bit/Mac)
+tic
+[ H,R,Theta,X ] = DCC_X( r, allpair, parallel );
+toc
+
+tic
+[ H,R,Theta,X ] = DCC_X_mex( r, allpair, parallel );
+toc
+
+%% Step (4) compare estimate H,R with true value H0,R0
+i = 1;
+j = 2;
+
+figure
+plot(1:T,squeeze(H0(i,j,:)),'r.-',1:T,squeeze(H(i,j,:)),'b.-')
+xlabel('time')
+legend('truth','estimated')
+##### SOURCE END #####
+--></body></html>

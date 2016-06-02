@@ -1,5 +1,5 @@
 function [C] = DCC(Dat)
-% function [Ct, Ht] = DCC(dat)
+% function C = DCC(dat)
 
 [T,p] = size(Dat);
 C = ones(p,p,T);
