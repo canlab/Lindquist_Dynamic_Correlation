@@ -25,7 +25,7 @@ function [logL, Rt, likelihoods, Qt]=dcc_mvgarch_likelihood(params, stdresid, P,
 % kevin.sheppard@economics.ox.ac.uk
 % Revision: 2    Date: 12/31/2001
 
-
+doverbose = 0;
 
 [t,k]=size(stdresid);
 a=params(1:P);
@@ -64,15 +64,20 @@ Rt=Rt(:,:,(m+1:t+m));
 logL=(1/2)*logL;
 likelihoods=(1/2)*likelihoods(m+1:t+m);
 
-if isreal(logL) 
+if isreal(logL)
 else
-   disp('Imag')
-   params
-   logL=10E+8;
+    if doverbose
+        disp('Imag')
+        params
+    end
+    
+    logL=10E+8;
 end
 
 if isinf(logL)
-   disp('Inf')
-   params
-   logL=10E+8;
+    if doverbose
+        disp('Inf')
+        params
+    end
+    logL=10E+8;
 end
