@@ -159,7 +159,7 @@ indx = 0;
 starttime = clock;
 
 % create time to complete string
-[day, hour, minute, second, display_string] = estimate_time_to_complete(starttime, 0, 0, 0);
+[day, hour, minute, second, display_string] = estimate_time_to_complete(starttime, 1, 1, 0);
 bspace = repmat('\b', 1, length(display_string));
 
 fprintf('Running %d pairs: Estimated complete in %s, %05d', n, display_string, indx);
