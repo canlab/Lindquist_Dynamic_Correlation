@@ -41,6 +41,8 @@ function [parameters, loglikelihood, Ht, Qt,  stdresid, likelihoods, stderrors, 
 
 % Lets do some error checking and clean up
 
+doverbose = 0;
+
 [t,k]=size(data);
 
 if k<2
@@ -78,7 +80,7 @@ options=optimset('fmincon');
 options=optimset(options,'Display','off','Diagnostics','off','MaxFunEvals',1000*max(archP+garchQ+1),'MaxIter',1000*max(archP+garchQ+1),'LargeScale','off','MaxSQPIter',1000);
 options  =  optimset(options , 'MaxSQPIter' , 1000);
 for i=1:k
-    fprintf(1,'Estimating GARCH model for Series %d\n',i)
+    if doverbose, fprintf(1,'Estimating GARCH model for Series %d\n',i); end
     [univariate{i}.parameters, univariate{i}.likelihood, univariate{i}.stderrors, univariate{i}.robustSE, univariate{i}.ht, univariate{i}.scores] ... 
         = fattailed_garch(data(:,i) , archP(i) , garchQ(i) , 'NORMAL',[], options);
     stdresid(:,i)=data(:,i)./sqrt(univariate{i}.ht);
@@ -86,14 +88,20 @@ end
 
 
 options=optimset('fmincon');
-options  =  optimset(options , 'Display'     , 'iter');
-options  =  optimset(options , 'Diagnostics' , 'on');
+if doverbose
+    options  =  optimset(options , 'Display'     , 'iter');
+    options  =  optimset(options , 'Diagnostics' , 'on');
+else
+    options  =  optimset(options , 'Display'     , 'none');
+    options  =  optimset(options , 'Diagnostics' , 'off');
+end
+
 % options  =  optimset(options , 'LevenbergMarquardt' , 'on');
 options  =  optimset(options , 'LargeScale'  , 'off');
 
 
 dccstarting=[ones(1,dccP)*.01/dccP ones(1,dccQ)*.97/dccQ];
-fprintf(1,'\n\nEstimating the DCC model\n')
+if doverbose, fprintf(1,'\n\nEstimating the DCC model\n'); end
 
 [dccparameters,dccllf,EXITFLAG,OUTPUT,LAMBDA,GRAD]=fmincon('dcc_mvgarch_likelihood',dccstarting,ones(size(dccstarting)),[1-2*options.TolCon],[],[],zeros(size(dccstarting))+2*options.TolCon,[],[],options,stdresid,dccP,dccQ);
 
@@ -136,7 +144,7 @@ if nargout >=7
     end
     
     % Ok so much for a All and A12 and A22, as we have them all between whats above
-    fprintf(1,'\n\nCalculating Standard Errors, this can take a while\n');
+    if doverbose, fprintf(1,'\n\nCalculating Standard Errors, this can take a while\n'); end
     otherA=dcc_hessian('dcc_mvgarch_full_likelihood',parameters, dccP+dccQ, data, archP,garchQ,dccP,dccQ);
     A(length(parameters)-dccP-dccQ+1:length(parameters),:)=otherA;
     % tempA=hessian('dcc_garch_full_likelihood',parameters, data, archP,garchQ,dccP,dccQ);

@@ -75,7 +75,7 @@ function [parameters, likelihood, stderrors, robustSE, ht, scores] = fattailed_g
 % kevin.sheppard@economics.ox.ac.uk
 % Revision: 1    Date: 10/15/2000
 
-
+doverbose = 0;
 
 
 t=size(data,1);
@@ -200,7 +200,7 @@ T=size(data,1);
 
 if EXITFLAG<=0
    EXITFLAG
-   fprintf(1,'Not Sucessful! \n')
+   if doverbose, fprintf(1,'Not Sucessful! \n'); end
 end
 
 parameters(find(parameters    <  0)) = 0;          

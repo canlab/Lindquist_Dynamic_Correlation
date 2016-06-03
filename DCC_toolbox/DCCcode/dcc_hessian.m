@@ -23,7 +23,7 @@
 % kevin.sheppard@economics.ox.ac.uk
 % Revision: 2    Date: 12/31/2001
 
-
+doverbose = 0;
 
 
 
@@ -60,7 +60,7 @@ H=h*h';
 index=1;
 for i=1:n
 for j=(n-N+1):n
-    fprintf('Evaluating Function %d out of %d\n',index,n*N);
+    if doverbose, fprintf('Evaluating Function %d out of %d\n',index,n*N); end
   if i<=j;
       H(i,j) = (feval(f,x+ee(:,i)+ee(:,j),varargin{:})-g(i)-g(j)+fx)/H(i,j);
       H(j,i) = H(i,j);

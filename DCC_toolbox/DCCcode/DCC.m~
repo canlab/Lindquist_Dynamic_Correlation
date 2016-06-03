@@ -155,15 +155,12 @@ end
 
 n = p*(p-1) ./ 2;
 indx = 0;
-
+fprintf('Running %d pairs: %05d', n, indx);
 starttime = clock;
 
 % create time to complete string
 [day, hour, minute, second, display_string] = estimate_time_to_complete(starttime, 0, 0, 0);
 bspace = repmat('\b', 1, length(display_string));
-
-fprintf('Running %d pairs: Estimated complete in %s, %05d', n, display_string, indx);
-
 
 for j=1:(p-1)  
     for k=(j+1):p
@@ -172,22 +169,9 @@ for j=1:(p-1)
         C(j,k,:) = Ctmat(1,2,:); 
         C(k,j,:) = Ctmat(1,2,:); 
 
+        
         indx = indx + 1;
-        
-        if indx == 1 || mod(indx, 10) == 0
-            
-            % Update time to complete
-            fprintf('\b\b\b\b\b\b\b');  % remove number + 2 chars
-            fprintf(bspace);            % remove old string
-            
-            [day, hour, minute, second, display_string] = estimate_time_to_complete(starttime, indx, n, 1);
-
-            fprintf(', %05d', indx);
-        else
-            % Just update counter
-            fprintf('\b\b\b\b\b%05d', indx);
-        end
-        
+        fprintf('\b\b\b\b\b%05d', indx);
     end
 end
 
